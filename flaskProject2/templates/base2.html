@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div>Microblog:
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    {% macro multiple3(a=0, b=0)%}
+        {{ a*(b**3) }}
+    {% endmacro %}
+    <h1>Hello, my name is {{ name }}</h1>
+    {% for i in range(10) %}
+        {% if not i%2  %}
+            <p style="color:red;">[{{ multiple3(i, 10) }}] is odd!</p>
+        {% endif %}
+    {% endfor %}
+
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

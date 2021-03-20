@@ -1,0 +1,23 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+    {% macro set_input(name) %}
+        {% if name.label != 'Субмит' %}
+            {{ name.label }}
+        {% endif %}
+        {% if name.label == 'username' or name.label == 'password' or name.label == 'email' %}
+            <p>{{ name(size = 40) }}</p>
+        {% else %}
+            <p>{{ name }}</p>
+        {% endif %}
+        {% for error in name.errors %}
+            <p style="color:red; font-size: 18px;">{{ error }}</p>
+        {% endfor %}
+    {% endmacro %}
+    <form action="" method="POST" >
+    {{ form.hidden_tag() }}
+        {% for input in form %}
+            {{ set_input(input) }}
+        {% endfor %}
+    </form>
+{% endblock %}
